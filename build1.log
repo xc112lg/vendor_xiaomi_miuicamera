@@ -1,0 +1,33 @@
+rbe_auto is a function
+rbe_auto () 
+{ 
+    local rom tools;
+    rom="$(_rbe_find_rom "$1")" || { 
+        _rbe_err "No ROM directory. Stopping.";
+        return 1
+    };
+    mkdir -p "$RBE_HOME";
+    chmod 700 "$RBE_HOME";
+    echo "$rom" > "$RBE_HOME/rom_dir";
+    _rbe_say "ROM: $rom";
+    _rbe_load_key || { 
+        _rbe_err "No working key. Stopping.";
+        return 1
+    };
+    tools="$(_rbe_find_tools)" || { 
+        _rbe_err "Could not get tools repo.";
+        return 1
+    };
+    _rbe_patch "$rom" "$tools" || return 1;
+    _rbe_reclient "$rom" "$tools" || return 1;
+    _rbe_env "$rom";
+    if ! pgrep -f 'soong_ui|ninja ' > /dev/null 2>&1; then
+        pkill -f reproxy 2> /dev/null;
+        pkill -f rewrapper 2> /dev/null;
+    fi;
+    cd "$rom" || return 1;
+    source build/envsetup.sh;
+    _rbe_say "RBE ready. account=$RBE_ACTIVE_ACCOUNT jobs=$NINJA_REMOTE_NUM_JOBS";
+    _rbe_say "Now: lunch <target>   (or: rbe_build <target> [goal])";
+    return 0
+}
