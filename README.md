@@ -1,0 +1,145 @@
+# MiuiCamera
+#How to install
+- Clone source
+```bash
+git clone https://github.com/HaiKito18/vendor_xiaomi_miuicamera.git vendor/xiaomi/miuicamera
+```
+- Add this in device.mk
+```bash
+$(call inherit-product, vendor/xiaomi/miuicamera/MiuiCamera.mk)
+```
+- Add this in BoardConfig.mk
+```bash
+include vendor/xiaomi/miuicamera/SEPolicy.mk
+```
+### Supported devices
+* agate
+* agategl
+* agatein
+* alioth
+* aliothin
+* amber
+* angelica
+* angelicain
+* angelican
+* apollo
+* apollo_pro
+* ares
+* aresin
+* atom
+* bhima
+* biloba
+* bomb
+* camellia
+* camelliain
+* camellian
+* camelliase
+* cannon
+* cannong
+* cas
+* cattail
+* cetus
+* cezanne
+* chopin
+* chopinin
+* citrus
+* cmi
+* courbet
+* courbetin
+* curtana
+* curtanacn
+* dandelion
+* elish
+* enuma
+* eos
+* evergo
+* evergoin
+* evergreen
+* excalibur
+* fleur
+* fleur_pro
+* fog
+* frost
+* galahad
+* gauguin
+* gauguinin
+* gauguininpro_pro
+* gauguinpro_pro
+* ginkgo
+* gram
+* haydn
+* haydn_pro
+* haydnin
+* haydnin_pro
+* iris
+* joyeuse
+* karna
+* lancelot
+* lemon
+* lilac
+* lime
+* limegl
+* lisa
+* lmi
+* lmipro_pro
+* maltose
+* mars
+* marsgl
+* merlin
+* merlinnfc
+* miel
+* miel_pro
+* mojito
+* mona
+* monet
+* nabu
+* odin
+* opal
+* peux
+* peux_pro
+* phoenix
+* phoenixin
+* picasso
+* picassoin
+* pissarro
+* pissarroin
+* pissarroinpro
+* pissarropro
+* pomelo
+* psyche
+* rain
+* rainbow
+* renoir
+* rosemary
+* rosemaryp
+* rosemaryp_pro
+* secret
+* secretin
+* selene
+* shiva
+* spes
+* spesn
+* star
+* star_pro
+* stargl
+* stargl_pro
+* sunny
+* surya
+* sweet
+* sweet_pro
+* sweetin
+* sweetin_pro
+* thyme
+* toco
+* tocoin
+* tucana
+* umi
+* vangogh
+* vayu
+* venus
+* veux
+* vida
+* vili
+* viva
+* wind
+* xig02

@@ -1,0 +1,70 @@
+diff --git a/SEPolicy.mk b/SEPolicy.mk
+index 1d5edfc..0661013 100644
+--- a/SEPolicy.mk
++++ b/SEPolicy.mk
+@@ -4,4 +4,4 @@
+ # SPDX-License-Identifier: Apache-2.0
+ #
+ 
+-BOARD_VENDOR_SEPOLICY_DIRS += vendor/xiaomi/miuicamera/sepolicy/vendor
++SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS += vendor/xiaomi/miuicamera/sepolicy/system_ext
+diff --git a/sepolicy/system_ext/miuicamera_app.te b/sepolicy/system_ext/miuicamera_app.te
+new file mode 100644
+index 0000000..3423e0a
+--- /dev/null
++++ b/sepolicy/system_ext/miuicamera_app.te
+@@ -0,0 +1,17 @@
++type miuicamera_app, domain, coredomain;
++
++app_domain(miuicamera_app)
++net_domain(miuicamera_app)
++
++allow miuicamera_app {
++    app_api_service
++    audioserver_service
++    cameraserver_service
++    mediaextractor_service
++    mediametrics_service
++    mediaserver_service
++}:service_manager find;
++
++dontaudit miuicamera_app radio_service:service_manager find;
++
++allow miuicamera_app privapp_data_file:file execute;
+diff --git a/sepolicy/system_ext/seapp_contexts b/sepolicy/system_ext/seapp_contexts
+new file mode 100644
+index 0000000..6c10800
+--- /dev/null
++++ b/sepolicy/system_ext/seapp_contexts
+@@ -0,0 +1 @@
++user=_app isPrivApp=true name=com.android.camera domain=miuicamera_app type=privapp_data_file levelFrom=all
+diff --git a/sepolicy/vendor/miuicamera_app.te b/sepolicy/vendor/miuicamera_app.te
+deleted file mode 100644
+index 3423e0a..0000000
+--- a/sepolicy/vendor/miuicamera_app.te
++++ /dev/null
+@@ -1,17 +0,0 @@
+-type miuicamera_app, domain, coredomain;
+-
+-app_domain(miuicamera_app)
+-net_domain(miuicamera_app)
+-
+-allow miuicamera_app {
+-    app_api_service
+-    audioserver_service
+-    cameraserver_service
+-    mediaextractor_service
+-    mediametrics_service
+-    mediaserver_service
+-}:service_manager find;
+-
+-dontaudit miuicamera_app radio_service:service_manager find;
+-
+-allow miuicamera_app privapp_data_file:file execute;
+diff --git a/sepolicy/vendor/seapp_contexts b/sepolicy/vendor/seapp_contexts
+deleted file mode 100644
+index 6c10800..0000000
+--- a/sepolicy/vendor/seapp_contexts
++++ /dev/null
+@@ -1 +0,0 @@
+-user=_app isPrivApp=true name=com.android.camera domain=miuicamera_app type=privapp_data_file levelFrom=all
